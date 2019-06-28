@@ -1,0 +1,88 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    defaultConfig {
+        applicationId "quickstartx.kural"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    flavorDimensions "default"
+
+    productFlavors {
+        production {
+            buildConfigField 'String', 'URL', '"https://api.com"';
+            applicationId "com.prodx.android"
+            resValue "string", "app_name", "QuickX"
+            minSdkVersion rootProject.ext.minSdkVersion
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            versionCode 1
+            versionName "1.0"
+            //   signingConfig signingConfigs.CommonKey
+        }
+        staging {
+            buildConfigField 'String', 'URL', '"https://v1/"';
+            resValue "string", "app_name", "Debug QuickX"
+            applicationId "com.stagex.android"
+            minSdkVersion rootProject.ext.minSdkVersion
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            versionCode 1
+            versionName "1.0"
+        }
+        /*    signingConfigs {
+
+                CommonKey {
+                    keyAlias 'key0'
+                    keyPassword '12345q'
+                    storePassword '12345q'
+                    storeFile file('/mnt/3d0ba385-bc8f-4fe7-b967-105cf8e04d3c/code/kural/AndroidQuickStart/DevelopmentKe.jks')
+                }
+            }*/
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
+}
+repositories {
+    mavenCentral()
+}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.appcompat:appcompat:$rootProject.appcompat"
+    implementation "com.google.android.material:material:$rootProject.materialVersion"
+    implementation "androidx.core:core:$rootProject.xcore"
+    implementation "androidx.cardview:cardview:$rootProject.cardview"
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta2'
+
+
+    // View model
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$rootProject.lifecycleVersion"
+
+
+
+
+}
+
+
